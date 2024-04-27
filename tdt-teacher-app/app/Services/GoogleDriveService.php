@@ -24,18 +24,20 @@ class GoogleDriveService
         $this->folderId ="1sFiUUkZWRvXq8pLBbhfbWa41A71MlQ3o";
     }
 
-    public function uploadImage($filePath)
+    public function uploadFile($filePath)
     {
         $fileMetadata = new GoogleDriveFile([
             'name' => basename($filePath),
             'parents' => [$this->folderId], 
         ]);
-
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mimeType = finfo_file($finfo, $filePath);
+        finfo_close($finfo);
         $content = file_get_contents($filePath);
 
         $file = $this->drive->files->create($fileMetadata, [
             'data' => $content,
-            'mimeType' => 'octet-stream', 
+            'mimeType' => $mimeType, 
             'uploadType' => 'multipart',
             'fields' => 'id',
         ]);
@@ -65,24 +67,17 @@ class GoogleDriveService
     return $file->webContentLink;
 }
 
-public function downloadFile($fileId)
+
+
+public function getFileNameFromDrive($fileId)
 {
-    try {
-        $file = $this->drive->files->get($fileId, ['fields' => 'name,mimeType']);
-        $response = $this->drive->files->get($fileId, ['alt' => 'media']);
-
-        $content = $response->getBody()->getContents();
-
-        header('Content-Type: ' . $file->mimeType);
-        header('Content-Disposition: attachment; filename="' . $file->name . '"');
-        header('Content-Length: ' . strlen($content));
-
-        echo $content;
-        exit; // Make sure to exit after sending the content
-    } catch (\Exception $e) {
-        return false;
-    }
+    $file = $this->drive->files->get($fileId);
+    return $file->getName();
 }
+public function downloadUrl($url){
+    return 'https://drive.google.com/uc?export=download&id=' . $this->extractIdFromLink($url);
+}
+
 
 
 

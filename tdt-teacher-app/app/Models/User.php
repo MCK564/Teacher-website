@@ -46,4 +46,5 @@ class User extends Authenticatable
     public function downloads(){
         return $this->hasMany(Download::class);
     }
+    
 }

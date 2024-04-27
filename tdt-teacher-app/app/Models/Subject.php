@@ -10,7 +10,7 @@ class Subject extends Model
     use HasFactory;
     protected $table = 'subjects';
     protected $fillable = ['id','name','description'];
-
+    
     public function documents(){
         return $this->hasMany(Document::class);
     }
