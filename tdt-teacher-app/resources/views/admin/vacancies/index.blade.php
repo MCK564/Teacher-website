@@ -55,6 +55,8 @@
         @endforeach
     </x-table>
 
-    {{ $vacancies->links() }}
+    <div class="flex justify-center mt-3">
+        {{ $vacancies->links() }}
+</div>
 </div>
 @endsection

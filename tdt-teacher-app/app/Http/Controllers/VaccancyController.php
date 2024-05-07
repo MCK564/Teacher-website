@@ -11,7 +11,7 @@ class VaccancyController extends Controller
 {
     public function index(){
         if (Auth::id()) {
-            $vacancies = Vaccancy::paginate(24);
+            $vacancies = Vaccancy::paginate(4);
             $userType = Auth()->user()->user_type;
             if ($userType == 'user') {
                 return view('vacancy.index',compact('vacancies'));
@@ -91,7 +91,7 @@ class VaccancyController extends Controller
 
                 $userType = Auth()->user()->user_type;
                 if ($userType == 'user') {
-                    return view('vacancies',compact('vacancies'));
+                    return view('vacancy/index',compact('vacancies'));
                 } else if ($userType == 'admin') {
     
                    return view('admin.vacancies.index',compact('vacancies'));

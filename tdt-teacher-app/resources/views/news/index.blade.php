@@ -32,9 +32,11 @@
             @endforeach
         </div>
         @endif
+        <div class="flex justify-center my-4">
+            {{ $news->links() }}
+        </div>
+      
     </div>
-    </div>
-    <div class="flex justify-center">
-        {{ $news->links() }}
-    </div>
+   
+
 @endsection

@@ -14,7 +14,7 @@ class DocumentController extends Controller
     public function index(){
         if (Auth::id()) {
             $subjects = Subject::all();
-            $documents = Document::paginate(24);
+            $documents = Document::paginate(4);
             $userType = Auth()->user()->user_type;
             if ($userType == 'user') {
                 return view('documents.index',compact('documents','subjects'));

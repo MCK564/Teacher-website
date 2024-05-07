@@ -65,7 +65,9 @@
             @endforeach
         </div>
         
- 
+        <div class="flex justify-center mt-3">
+            {{ $documents->links() }}
+    </div>
    
 </div>
 @endsection

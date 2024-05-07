@@ -43,11 +43,13 @@
         
             @endforeach
         </div>
+        <div class="flex justify-center my-4">
+            {{ $vacancies->links() }}
+    </div>
         </div>
         @endif
-    </div>
-</div>
-<div class="flex justify-center">
-        {{ $vacancies->links() }}
-</div>
+      
+  
+
+
 @endsection

@@ -53,6 +53,9 @@
         </tr>
         @endforeach
     </x-table>
+    <div class="flex justify-center mt-3">
+        {{ $news->links() }}
+</div>
     @endif
     
     @if (isset($message))

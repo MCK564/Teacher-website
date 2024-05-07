@@ -11,7 +11,7 @@ class NewsController extends Controller
 {
     public function index(){
         if (Auth::id()) {
-            $news = News::paginate(24);
+            $news = News::paginate(4);
             $userType = Auth()->user()->user_type;
             if ($userType == 'user') {
                 return view('news.index', compact('news'));
